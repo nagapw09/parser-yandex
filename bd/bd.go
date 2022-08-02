@@ -17,7 +17,7 @@ func open() *gorm.DB {
 
 func Base() *gorm.DB {
 
-	err := open().Exec("CREATE TABLE google_queries( Id INT AUTO_INCREMENT PRIMARY KEY, link VARCHAR(220), header VARCHAR(220), pages VARCHAR(220) );")
+	err := open().Exec("CREATE TABLE google_queries( Id INT AUTO_INCREMENT PRIMARY KEY, link VARCHAR(220), header VARCHAR(220), request VARCHAR(220), pages VARCHAR(220) );")
 
 	if err != nil {
 		return err
@@ -25,10 +25,10 @@ func Base() *gorm.DB {
 	return nil
 }
 
-func Insert(link string, header string, pages string) *gorm.DB {
+func Insert(link string, header string, request string, pages string) *gorm.DB {
 
-	err := open().Exec("INSERT INTO `google_queries`(`link`, `header`, `pages`) VALUES (?, ?, ?)",
-		link, header, pages)
+	err := open().Exec("INSERT INTO `google_queries`(`link`, `header`, `request`, `pages`) VALUES (?, ?, ?, ?)",
+		link, header, request, pages)
 	if err != nil {
 		return err
 	}

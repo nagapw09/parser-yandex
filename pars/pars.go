@@ -34,8 +34,7 @@ func ExampleScrape(w http.ResponseWriter) {
 		header := s.Find(".OrganicTitleContentSpan").Text()
 
 		fmt.Fprintf(w, "№ = %d Link - %s Header - %s\n", i, link, header)
-		bd.Insert(link, header, pages)
-		fmt.Println("Закончил парсить")
+		bd.Insert(link, header, request, pages)
 	})
-
+	fmt.Println("Закончил парсить")
 }
