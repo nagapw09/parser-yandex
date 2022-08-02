@@ -24,9 +24,6 @@ func ExampleScrape(w http.ResponseWriter) {
 		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
 	}
 
-	/*	b, err := ioutil.ReadAll(res.Body)
-		fmt.Fprintf(w, "res = %s\n", b)
-	*/
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
 		log.Fatal(err)
