@@ -8,16 +8,16 @@ import (
 	"net/http"
 )
 
-func ExampleScrape(w http.ResponseWriter) {
+func ExampleScrape() {
 	var request, urls, pages string
 	fmt.Println("Что ищем?")
 	fmt.Scanf("%s\n", &request)
 	fmt.Println("Какую страниц парсим?")
 	fmt.Scanf("%s\n", &pages)
-	urls = ("https://yandex.ru/search/?text=" + request + "&lr=213&p=" + pages)
+	urls = "https://yandex.ru/search/?text=" + request + "&lr=213&p=" + pages
 	res, err := http.Get(urls)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
@@ -26,15 +26,14 @@ func ExampleScrape(w http.ResponseWriter) {
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	doc.Find(".serp-item").Each(func(i int, s *goquery.Selection) {
 		link, _ := s.Find("a").Attr("href")
 		header := s.Find(".OrganicTitleContentSpan").Text()
 
-		fmt.Fprintf(w, "№ = %d Link - %s Header - %s\n", i, link, header)
+		fmt.Printf("№ = %d Link - %s Header - %s\n", i, link, header)
 		bd.Insert(link, header, request, pages)
 	})
-	fmt.Println("Закончил парсить")
 }

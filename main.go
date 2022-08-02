@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/nagapw09/parser2/bd"
-	"github.com/nagapw09/parser2/server"
+	"github.com/nagapw09/parser2/pars"
 )
 
 func main() {
 	bd.Base()
-	server.Servers()
+	pars.ExampleScrape()
 }
