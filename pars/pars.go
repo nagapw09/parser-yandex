@@ -8,12 +8,13 @@ import (
 	"net/http"
 )
 
-func ExampleScrape() {
-	var request, urls, pages string
-	fmt.Println("Что ищем?")
-	fmt.Scanf("%s\n", &request)
-	fmt.Println("Какую страниц парсим?")
-	fmt.Scanf("%s\n", &pages)
+func ExampleScrape(request string, pages string) {
+	var urls string
+	//fmt.Println("Что ищем?")
+	//fmt.Scanf("%s\n", &request)
+	//fmt.Println("Какую страниц парсим?")
+	//fmt.Scanf("%s\n", &pages)
+
 	urls = "https://yandex.ru/search/?text=" + request + "&lr=213&p=" + pages
 	res, err := http.Get(urls)
 	if err != nil {
