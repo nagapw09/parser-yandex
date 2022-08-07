@@ -8,9 +8,9 @@ import (
 
 func main() {
 	var arg1 = flag.String("1", "", "request")
-	var arg2 = flag.String("2", "0", "pages")
+	var arg2 = flag.Int("2", 0, "page")
 	flag.Parse()
 
-	bd.Base()
+	bd.CreateTable()
 	pars.ExampleScrape(*arg1, *arg2)
 }
