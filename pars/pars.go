@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/nagapw09/parser2/bd"
+	"github.com/nagapw09/parser2/logger"
+	_ "github.com/nagapw09/parser2/logger"
 	"log"
 	"net/http"
 )
@@ -17,18 +19,15 @@ func ExampleScrape(request string, pages string) {
 
 	urls = "https://yandex.ru/search/?text=" + request + "&lr=213&p=" + pages
 	res, err := http.Get(urls)
-	if err != nil {
-		log.Println(err)
-	}
+	logger.ForError(err)
+
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
 		log.Fatalf("status code error: %d %s", res.StatusCode, res.Status)
 	}
 
 	doc, err := goquery.NewDocumentFromReader(res.Body)
-	if err != nil {
-		log.Println(err)
-	}
+	logger.ForError(err)
 
 	doc.Find(".serp-item").Each(func(i int, s *goquery.Selection) {
 		link, _ := s.Find("a").Attr("href")

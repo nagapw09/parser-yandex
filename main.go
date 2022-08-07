@@ -7,5 +7,5 @@ import (
 
 func main() {
 	bd.Base()
-	pars.ExampleScrape()
+	pars.ExampleScrape("jkl", "0")
 }
