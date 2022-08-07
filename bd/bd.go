@@ -23,12 +23,14 @@ func Base() {
 	}
 }
 
-func Insert(link string, header string, request string, pages string) {
+func Insert(link string, header string, request string, pages string) *gorm.DB {
 
 	err := open().Exec("INSERT INTO `google_queries`(`link`, `header`, `request`, `pages`) VALUES (?, ?, ?, ?)",
 		link, header, request, pages)
 	if err != nil {
 		log.Fatal(err)
+		return err
 	}
 
+	return nil
 }
