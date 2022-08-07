@@ -15,12 +15,14 @@ func open() *gorm.DB {
 	return db
 }
 
-func Base() {
+func Base() *gorm.DB {
 
 	err := open().Exec("CREATE TABLE google_queries( Id INT AUTO_INCREMENT PRIMARY KEY, link VARCHAR(220), header VARCHAR(220), request VARCHAR(220), pages VARCHAR(220) );")
 	if err != nil {
-		log.Println(err.Error)
+		log.Println(err)
+		return err
 	}
+	return nil
 }
 
 func Insert(link string, header string, request string, pages string) *gorm.DB {
