@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/nagapw09/parser2/bd"
-	"github.com/nagapw09/parser2/pars"
+	"github.com/nagapw09/parser2/pkg/bd"
+	"github.com/nagapw09/parser2/pkg/pars"
 )
 
 func main() {

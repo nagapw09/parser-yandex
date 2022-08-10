@@ -3,9 +3,9 @@ package pars
 import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/nagapw09/parser2/bd"
-	"github.com/nagapw09/parser2/logger"
-	_ "github.com/nagapw09/parser2/logger"
+	"github.com/nagapw09/parser2/pkg/bd"
+	"github.com/nagapw09/parser2/pkg/logger"
+	_ "github.com/nagapw09/parser2/pkg/logger"
 	"log"
 	"net/http"
 	"strconv"
