@@ -3,21 +3,18 @@ package pars
 import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
-	"github.com/nagapw09/parser2/bd"
-	"github.com/nagapw09/parser2/logger"
-	_ "github.com/nagapw09/parser2/logger"
+	"github.com/nagapw09/parser2/pkg/bd"
+	"github.com/nagapw09/parser2/pkg/logger"
+	_ "github.com/nagapw09/parser2/pkg/logger"
 	"log"
 	"net/http"
+	"strconv"
 )
 
-func ExampleScrape(request string, pages string) {
+func ExampleScrape(request string, page int) {
 	var urls string
-	//fmt.Println("Что ищем?")
-	//fmt.Scanf("%s\n", &request)
-	//fmt.Println("Какую страниц парсим?")
-	//fmt.Scanf("%s\n", &pages)
 
-	urls = "https://yandex.ru/search/?text=" + request + "&lr=213&p=" + pages
+	urls = "https://yandex.ru/search/?text=" + request + "&lr=213&p=" + strconv.Itoa(page)
 	res, err := http.Get(urls)
 	logger.ForError(err)
 
@@ -34,6 +31,6 @@ func ExampleScrape(request string, pages string) {
 		header := s.Find(".OrganicTitleContentSpan").Text()
 
 		fmt.Printf("№ = %d Link - %s Header - %s\n", i, link, header)
-		bd.Insert(link, header, request, pages)
+		bd.Insert(link, header, request, page)
 	})
 }
